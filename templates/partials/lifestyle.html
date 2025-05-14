@@ -1,0 +1,198 @@
+<div class="card shadow-sm">
+    <div class="card-header bg-primary bg-opacity-10">
+        <h4>
+            <div class="icon-circle bg-primary-light me-3 d-inline-flex">
+                <i class="fas fa-running text-primary"></i>
+            </div>
+            Lifestyle Recommendations
+        </h4>
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            Get personalized lifestyle recommendations based on your health profile. Fill out the form below for tailored advice.
+        </p>
+        
+        <form id="lifestyle-form" class="mt-4">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="lifestyle-age" class="form-label">Age</label>
+                    <input type="number" class="form-control" id="lifestyle-age" min="18" max="100" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="lifestyle-weight" class="form-label">Weight (kg)</label>
+                    <input type="number" class="form-control" id="lifestyle-weight" min="30" max="300" step="0.1" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="lifestyle-height" class="form-label">Height (cm)</label>
+                    <input type="number" class="form-control" id="lifestyle-height" min="100" max="250" required>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="lifestyle-activity" class="form-label">Activity Level</label>
+                    <select class="form-select" id="lifestyle-activity" required>
+                        <option value="" selected disabled>Select level</option>
+                        <option value="sedentary">Sedentary (little to no exercise)</option>
+                        <option value="light">Light (1-3 days/week)</option>
+                        <option value="moderate">Moderate (3-5 days/week)</option>
+                        <option value="active">Active (6-7 days/week)</option>
+                        <option value="very_active">Very Active (professional athlete level)</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lifestyle-diet" class="form-label">Diet Preference</label>
+                    <select class="form-select" id="lifestyle-diet" required>
+                        <option value="" selected disabled>Select preference</option>
+                        <option value="omnivore">Omnivore (meat & plants)</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="pescatarian">Pescatarian</option>
+                        <option value="keto">Keto</option>
+                        <option value="paleo">Paleo</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="lifestyle-sleep" class="form-label">Average Sleep Hours (per night)</label>
+                    <input type="number" class="form-control" id="lifestyle-sleep" min="0" max="24" step="0.5" required>
+                </div>
+            </div>
+            
+            <div class="d-grid gap-2 mt-3">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-lightbulb me-2"></i>Get Personalized Recommendations
+                </button>
+            </div>
+        </form>
+        
+        <div id="lifestyle-result" class="mt-4 d-none">
+            <hr>
+            <h5 class="card-title">Your Lifestyle Recommendations</h5>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card bg-primary bg-opacity-10">
+                        <div class="card-body text-center">
+                            <h6 class="card-subtitle mb-2 text-primary">BMI Status</h6>
+                            <p class="display-6">
+                                <span id="lifestyle-bmi">--</span>
+                            </p>
+                            <p class="h5" id="lifestyle-weight-status">--</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h6 class="card-subtitle mb-2 text-primary">Sleep Quality</h6>
+                            <p class="display-6" id="lifestyle-sleep-quality">--</p>
+                            <div class="mt-2">
+                                <i class="fas fa-bed me-2 text-primary"></i><span id="lifestyle-sleep-hours">--</span> hours/night
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <div class="accordion" id="recommendationsAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="exerciseRecommendationsHeader">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#exerciseRecommendations" aria-expanded="true" aria-controls="exerciseRecommendations">
+                                <i class="fas fa-dumbbell me-2"></i>Exercise Recommendations
+                            </button>
+                        </h2>
+                        <div id="exerciseRecommendations" class="accordion-collapse collapse show" aria-labelledby="exerciseRecommendationsHeader" data-bs-parent="#recommendationsAccordion">
+                            <div class="accordion-body">
+                                <ul id="exercise-recommendations" class="list-group list-group-flush">
+                                    <!-- Exercise recommendations will be inserted here -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="dietRecommendationsHeader">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dietRecommendations" aria-expanded="false" aria-controls="dietRecommendations">
+                                <i class="fas fa-utensils me-2"></i>Diet Recommendations
+                            </button>
+                        </h2>
+                        <div id="dietRecommendations" class="accordion-collapse collapse" aria-labelledby="dietRecommendationsHeader" data-bs-parent="#recommendationsAccordion">
+                            <div class="accordion-body">
+                                <ul id="diet-recommendations" class="list-group list-group-flush">
+                                    <!-- Diet recommendations will be inserted here -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="sleepRecommendationsHeader">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sleepRecommendations" aria-expanded="false" aria-controls="sleepRecommendations">
+                                <i class="fas fa-moon me-2"></i>Sleep Recommendations
+                            </button>
+                        </h2>
+                        <div id="sleepRecommendations" class="accordion-collapse collapse" aria-labelledby="sleepRecommendationsHeader" data-bs-parent="#recommendationsAccordion">
+                            <div class="accordion-body">
+                                <ul id="sleep-recommendations" class="list-group list-group-flush">
+                                    <!-- Sleep recommendations will be inserted here -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="weightRecommendationsHeader">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#weightRecommendations" aria-expanded="false" aria-controls="weightRecommendations">
+                                <i class="fas fa-weight me-2"></i>Weight Management
+                            </button>
+                        </h2>
+                        <div id="weightRecommendations" class="accordion-collapse collapse" aria-labelledby="weightRecommendationsHeader" data-bs-parent="#recommendationsAccordion">
+                            <div class="accordion-body">
+                                <ul id="weight-recommendations" class="list-group list-group-flush">
+                                    <!-- Weight recommendations will be inserted here -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="generalRecommendationsHeader">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#generalRecommendations" aria-expanded="false" aria-controls="generalRecommendations">
+                                <i class="fas fa-star me-2"></i>General Recommendations
+                            </button>
+                        </h2>
+                        <div id="generalRecommendations" class="accordion-collapse collapse" aria-labelledby="generalRecommendationsHeader" data-bs-parent="#recommendationsAccordion">
+                            <div class="accordion-body">
+                                <ul id="general-recommendations" class="list-group list-group-flush">
+                                    <!-- General recommendations will be inserted here -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" id="lifestyle-start-over">
+                    <i class="fas fa-redo me-2"></i>Start Over
+                </button>
+            </div>
+        </div>
+        
+        <div id="lifestyle-loading" class="text-center mt-4 d-none">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Generating personalized recommendations...</p>
+        </div>
+        
+        <div id="lifestyle-error" class="alert alert-danger mt-4 d-none">
+            <h6><i class="fas fa-exclamation-triangle me-2"></i>Error</h6>
+            <p id="lifestyle-error-message">An error occurred while generating recommendations.</p>
+        </div>
+    </div>
+</div>

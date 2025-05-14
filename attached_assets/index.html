@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anomaly Detection in ECG Signals</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #0056b3;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+        }
+        img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        /* List Styles */
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        /* Button Styles */
+        .collapsible {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+        .collapsible:hover {
+            background-color: #003d75;
+        }
+        .content {
+            padding: 10px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        /* Animation for Collapsible */
+        .content.active {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Anomaly Detection in ECG Signals Using Deep Learning</h1>
+        <p>This project uses Long Short-Term Memory (LSTM) networks to detect irregular heart patterns in ECG data.</p>
+
+        <h2>Key Objectives</h2>
+        <ul>
+            <li>Improving patient outcomes with early detection of heart conditions.</li>
+            <li>Enhancing diagnostic accuracy through deep learning.</li>
+            <li>Reducing clinician workload by automating ECG analysis.</li>
+        </ul>
+
+        <h2>Components</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Software</td>
+                    <td>Python, TensorFlow, Keras, NumPy, Scikit-learn</td>
+                </tr>
+                <tr>
+                    <td>Hardware</td>
+                    <td>Laptop with sufficient CPU and RAM</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Methodology</h2>
+        <ol>
+            <li>Data Extraction and Preprocessing</li>
+            <li>Feature Extraction and Model Building</li>
+            <li>Model Evaluation</li>
+        </ol>
+
+        <h2>Project Impact</h2>
+        <p>The project helps in early identification of cardiac anomalies, making healthcare more accessible and efficient.</p>
+
+        <!-- Image with Hover Effect -->
+        <img src="assets/uml-diagram.png" alt="Flow Diagram">
+
+        <!-- Collapsible Section for LSTM -->
+        <button class="collapsible">Click to learn more about LSTM networks</button>
+        <div class="content">
+            <h3>Introduction to LSTM Model</h3>
+            <p>LSTM, short for <strong>Long Short-Term Memory</strong>, is a type of artificial neural network designed to process and make predictions based on sequential data, such as time-series data, speech, or text. It belongs to the class of <strong>Recurrent Neural Networks (RNNs)</strong> but overcomes the limitations of standard RNNs, especially in handling long-term dependencies.</p>
+            <p>The main goal of LSTMs is to remember important information over long sequences while ignoring irrelevant details. This capability makes them highly effective in tasks such as natural language processing, speech recognition, and stock price prediction.</p>
+            
+            <h4>Key Concepts of LSTM</h4>
+            <ul>
+                <li><strong>Memory Cell</strong>: The heart of an LSTM is the memory cell, which can store information over long periods.</li>
+                <li><strong>Gates</strong>: LSTMs use gates to control the flow of information. These are mechanisms to decide:
+                    <ul>
+                        <li>What information to keep or forget.</li>
+                        <li>What new information to add.</li>
+                        <li>What to output as the result.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h5>There are three main gates:</h5>
+            <ul>
+                <li><strong>Forget Gate</strong>: Decides what information to discard from the memory.</li>
+                <li><strong>Input Gate</strong>: Decides what new information to store in the memory.</li>
+                <li><strong>Output Gate</strong>: Decides what information to output at the current step.</li>
+            </ul>
+
+            <h4>How LSTM Works: Step-by-Step</h4>
+            <p>Below is a diagram illustrating the workflow of an LSTM model:</p>
+            <img src="https://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-chain.png" alt="LSTM Workflow">
+
+            <p><strong>1. Input:</strong> At each step, the LSTM receives:
+                <ul>
+                    <li>The current input data (<code>x_t</code>).</li>
+                    <li>The previous hidden state (<code>h_{t-1}</code>).</li>
+                    <li>The previous cell state (<code>C_{t-1}</code>).</li>
+                </ul>
+            </p>
+
+            <p><strong>2. Forget Gate:</strong>
+                <br>Input: <code>h_{t-1}</code>, <code>x_t</code>.
+                <br>Output: A value between 0 and 1 for each piece of information in the cell state.
+                <br>Formula: 
+                <code>f_t = σ(W_f ⋅ [h_{t-1}, x_t] + b_f)</code>
+                <br><strong>f_t</strong> determines which parts of <code>C_{t-1}</code> to retain.
+            </p>
+
+            <p><strong>3. Input Gate:</strong>
+                <br>Input: <code>h_{t-1}</code>, <code>x_t</code>.
+                <br>Two steps:
+                <ul>
+                    <li>A sigmoid layer determines which values to update.</li>
+                    <li>A tanh layer creates candidate values to add to the cell state.</li>
+                </ul>
+                Formula:
+                <code>i_t = σ(W_i ⋅ [h_{t-1}, x_t] + b_i)</code>
+                <br>
+                <code>~C_t = tanh(W_c ⋅ [h_{t-1}, x_t] + b_c)</code>
+            </p>
+
+            <p><strong>4. Update Cell State:</strong>
+                <br>Combine the forget and input gates to update the cell state:
+                <code>C_t = f_t ⋆ C_{t-1} + i_t ⋆ ~C_t</code>
+            </p>
+
+            <p><strong>5. Output Gate:</strong>
+                <br>Formula:
+                <code>o_t = σ(W_o ⋅ [h_{t-1}, x_t] + b_o)</code>
+                <br>The hidden state is: 
+                <code>h_t = o_t ⋆ tanh(C_t)</code>
+            </p>
+
+            <h4>Intuition of Gates</h4>
+            <ul>
+                <li><strong>Forget Gate</strong>: Think of it as erasing unimportant memories.</li>
+                <li><strong>Input Gate</strong>: Like writing new important memories.</li>
+                <li><strong>Output Gate</strong>: Selecting what part of the memory to share as the current output.</li>
+            </ul>
+
+            <h4>Why LSTM Is Powerful</h4>
+            <ul>
+                <li><strong>Handles Long-Term Dependencies</strong>: Unlike standard RNNs, LSTM can learn patterns across long sequences without forgetting earlier information.</li>
+                <li><strong>Prevents Vanishing Gradient Problem</strong>: Through its gating mechanism, LSTM avoids the vanishing gradient issue that affects traditional RNNs during training.</li>
+                <li><strong>Versatile</strong>: Works for both short-term and long-term dependencies in data.</li>
+            </ul>
+
+            <h4>Applications</h4>
+            <ul>
+                <li><strong>Language Modeling</strong>: Predicting the next word in a sentence.</li>
+                <li><strong>Machine Translation</strong>: Translating text from one language to another.</li>
+                <li><strong>Speech Recognition</strong>: Transcribing spoken words.</li>
+                <li><strong>Time-Series Forecasting</strong>: Predicting future values, such as stock prices or weather conditions.</li>
+            </ul>
+
+            <h4>Credits</h4>
+            <p>Special thanks to <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs">Colah's blogs</a> for providing valuable insights on LSTM concepts and images.</p>
+        </div>
+    </div>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        for (var i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+

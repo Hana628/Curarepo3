@@ -1,0 +1,395 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi", "Hey", "Hello", "Good day", "Greetings", "What's up",
+        "How are you", "Is anyone there?", "Hello", "Good morning", "Good evening"
+      ],
+      "responses": [
+        "Hello! I'm CURA, your health assistant. How can I help you today?",
+        "Hi there! I'm CURA. How can I assist with your health questions?",
+        "Good day! I'm CURA, here to help with your health concerns. What do you need?",
+        "Greetings! I'm CURA, your medical assistant. How may I help you?"
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye", "See you later", "Goodbye", "I'm leaving", "Have a good day", "See you",
+        "Talk to you later", "I have to go", "Exit", "End", "Close"
+      ],
+      "responses": [
+        "Goodbye! Take care of your health.",
+        "See you later. Remember to stay healthy!",
+        "Take care! Reach out if you have more health questions.",
+        "Goodbye! I hope I was able to help with your health concerns."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thanks", "Thank you", "That's helpful", "Thanks for the help", "I appreciate it",
+        "Thank you so much", "Thanks for your assistance", "That was helpful"
+      ],
+      "responses": [
+        "You're welcome! Let me know if you need anything else.",
+        "Happy to help! Feel free to ask more health questions.",
+        "Anytime! Your health is important to me.",
+        "My pleasure! Let me know if you have other questions."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "about",
+      "patterns": [
+        "What are you?", "Who are you?", "Tell me about yourself", "What can you do?",
+        "How do you work?", "What's your purpose?", "What services do you offer?"
+      ],
+      "responses": [
+        "I'm CURA, an AI health assistant designed to help with health questions and predictions. I can provide information about various health conditions, predict risks for certain diseases, offer lifestyle recommendations, detect anomalies in health data, and help you navigate through our health services.",
+        "I'm CURA, your AI health assistant. I can answer medical questions, assess health risks through various predictive models, and guide you to the appropriate healthcare resources.",
+        "I'm an AI health assistant named CURA. I use machine learning models to help predict health risks including blood pressure issues, diabetes, and more. I can also answer general medical questions and guide you through our health platform."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "help",
+      "patterns": [
+        "Help", "I need help", "Can you help me?", "What should I do?", "How can you assist me?",
+        "What can you help with?", "I have a problem", "Support", "Assist me"
+      ],
+      "responses": [
+        "I can help with health information, risk predictions, and guidance on various health concerns. You can ask me specific medical questions or use our prediction tools for blood pressure, diabetes, skin disease analysis, and more. What do you need help with?",
+        "I'm here to assist with your health concerns. I can answer medical questions, provide risk assessments using our prediction models, or guide you through our health services. How can I help you specifically?",
+        "I can assist by answering health questions, offering predictions for conditions like diabetes or blood pressure issues, providing lifestyle recommendations, and more. What kind of help do you need today?"
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "blood_pressure",
+      "patterns": [
+        "Blood pressure", "Check my blood pressure", "Hypertension", "Low blood pressure",
+        "Is my blood pressure normal?", "Blood pressure risk", "High blood pressure",
+        "BP check", "Predict my blood pressure", "Blood pressure assessment"
+      ],
+      "responses": [
+        "I can help assess your blood pressure risk. You'll need to provide information like your age, BMI, hemoglobin levels, and other metrics. Would you like to use our blood pressure prediction tool?",
+        "To assess your blood pressure status, you can use our prediction tool which analyzes factors like age, BMI, cholesterol levels, and other health metrics. Would you like to try the blood pressure prediction service?",
+        "Our blood pressure prediction model can help assess your risk based on various health factors. Would you like me to guide you to the blood pressure prediction tool?"
+      ],
+      "context": ["blood_pressure_prediction"]
+    },
+    {
+      "tag": "diabetes",
+      "patterns": [
+        "Diabetes", "Check for diabetes", "Diabetes risk", "Am I at risk for diabetes?",
+        "Predict diabetes", "High blood sugar", "Diabetes symptoms", "Diabetes assessment",
+        "Type 2 diabetes", "Diabetes prediction", "Sugar levels"
+      ],
+      "responses": [
+        "I can help assess your diabetes risk. You'll need to provide information like your age, BMI, glucose levels, family history, and physical activity. Would you like to use our diabetes prediction tool?",
+        "Our diabetes prediction model can analyze factors like your age, BMI, and glucose levels to assess your risk. Would you like to try the diabetes prediction service?",
+        "To help determine your diabetes risk, I can guide you to our prediction tool that considers factors like family history and lifestyle. Would you like to use the diabetes prediction feature?"
+      ],
+      "context": ["diabetes_prediction"]
+    },
+    {
+      "tag": "lifestyle",
+      "patterns": [
+        "Lifestyle advice", "How can I improve my lifestyle?", "Healthy living tips",
+        "Lifestyle recommendations", "Better lifestyle", "Health habits", "Wellness tips",
+        "Lifestyle assessment", "Healthy lifestyle", "Lifestyle improvements"
+      ],
+      "responses": [
+        "I can provide personalized lifestyle recommendations based on your age, gender, occupation, sleep patterns, and other factors. Would you like to use our lifestyle recommendation tool?",
+        "Our lifestyle recommendation system can suggest improvements based on your personal profile including sleep habits, physical activity, and diet. Would you like to try the lifestyle recommendation service?",
+        "To get personalized lifestyle advice, I can guide you to our recommendation tool that analyzes your current habits and suggests improvements. Would you like to use the lifestyle recommendation feature?"
+      ],
+      "context": ["lifestyle_recommendation"]
+    },
+    {
+      "tag": "anomaly",
+      "patterns": [
+        "Anomaly detection", "Check for abnormalities", "Heart anomalies", "ECG check",
+        "Heart rhythm problems", "Detect health anomalies", "Abnormal readings",
+        "Heart monitoring", "Cardiac anomalies", "ECG analysis"
+      ],
+      "responses": [
+        "Our anomaly detection system can identify unusual patterns in ECG readings that might indicate health concerns. Would you like to use the anomaly detection tool?",
+        "I can help detect potential anomalies in heart-related data like ECG readings. Would you like to try the anomaly detection service?",
+        "To check for potential health anomalies, especially related to heart function, you can use our anomaly detection feature. Would you like me to guide you there?"
+      ],
+      "context": ["anomaly_detection"]
+    },
+    {
+      "tag": "disease_prediction",
+      "patterns": [
+        "Disease prediction", "What disease might I have?", "Predict my condition",
+        "Disease symptoms", "Diagnose my symptoms", "Health condition check",
+        "Symptom analysis", "Medical diagnosis", "Check my symptoms"
+      ],
+      "responses": [
+        "I can help assess possible conditions based on your symptoms. Please note that this is not a medical diagnosis. Would you like to use our disease prediction tool?",
+        "Our disease prediction feature can analyze your symptoms to suggest potential conditions. Would you like to try the disease prediction service?",
+        "To get an idea of what might be causing your symptoms, you can use our disease prediction tool. Remember this is just a preliminary assessment. Would you like to use this feature?"
+      ],
+      "context": ["disease_prediction"]
+    },
+    {
+      "tag": "skin_disease",
+      "patterns": [
+        "Skin disease", "Skin condition", "Analyze skin problem", "Skin rash",
+        "Skin diagnosis", "Dermatology issue", "Skin analysis", "Check my skin",
+        "Skin lesion", "Skin evaluation", "Skin disorder"
+      ],
+      "responses": [
+        "I can help assess potential skin conditions using image analysis. You'll need to upload a photo of the affected area and provide some additional information. Would you like to use our skin disease prediction tool?",
+        "Our skin disease prediction feature can analyze images of skin conditions and provide potential assessments. Would you like to try the skin disease prediction service?",
+        "To get an idea of what might be causing your skin concerns, you can use our image-based assessment tool. Would you like to use the skin disease prediction feature?"
+      ],
+      "context": ["skin_disease_prediction"]
+    },
+    {
+      "tag": "flu",
+      "patterns": [
+        "Flu symptoms", "Do I have the flu?", "Cold or flu", "Influenza",
+        "Flu treatment", "Flu prevention", "Flu vs cold", "Flu vaccine",
+        "How long does flu last?", "Is flu contagious?"
+      ],
+      "responses": [
+        "Common flu symptoms include fever, cough, sore throat, body aches, headache, fatigue, and sometimes vomiting and diarrhea. Flu typically comes on suddenly and feels worse than a common cold. If you suspect you have the flu, rest, stay hydrated, and consult a healthcare provider if symptoms are severe.",
+        "Flu (influenza) typically causes fever, aches, chills, tiredness, sudden onset of symptoms, cough, and headache. It's different from a cold as symptoms are usually more severe and come on quickly. Treatment includes rest, fluids, and sometimes antiviral medications. If you're concerned about your symptoms, please consult a healthcare provider.",
+        "Influenza symptoms include fever, muscle aches, headache, fatigue, cough, and sore throat. It's contagious and spreads through respiratory droplets. Prevention includes vaccination, hand washing, and avoiding close contact with sick people. Most people recover within 1-2 weeks, but it can be serious for high-risk individuals. See a doctor if symptoms are severe."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "heart_attack",
+      "patterns": [
+        "Heart attack symptoms", "Signs of heart attack", "Chest pain", "Cardiac arrest",
+        "Heart attack warning", "Am I having a heart attack?", "Heart attack first aid",
+        "Heart attack risk", "Prevent heart attack", "Heart attack vs angina"
+      ],
+      "responses": [
+        "Common heart attack symptoms include chest pain/pressure (like squeezing), pain radiating to arm/shoulder/jaw, shortness of breath, cold sweat, nausea, and lightheadedness. Women may experience less obvious symptoms like fatigue and back pain. If you suspect a heart attack, call emergency services immediately. Every minute counts!",
+        "Warning signs of a heart attack include chest discomfort (pressure, squeezing, fullness), pain spreading to arms, back, neck, or jaw, shortness of breath, cold sweat, nausea, and lightheadedness. If you or someone else shows these symptoms, seek emergency medical help immediately - don't wait or drive yourself.",
+        "Heart attack symptoms include chest pain/pressure, discomfort in upper body (arms, back, neck, jaw), shortness of breath, cold sweat, nausea, and fatigue. This is a medical emergency requiring immediate attention. If you suspect a heart attack, call emergency services right away. While waiting, chew aspirin if not allergic and it's safe for you."
+      ],
+      "context": ["emergency"]
+    },
+    {
+      "tag": "headache",
+      "patterns": [
+        "Headache", "Migraine", "Head pain", "Tension headache", "Cluster headache",
+        "Headache remedies", "Headache causes", "Severe headache", "Chronic headache",
+        "Headache and nausea", "Headache treatment"
+      ],
+      "responses": [
+        "Headaches can range from tension headaches (dull pain, tight feeling) to migraines (throbbing pain, sensitivity to light/sound) to cluster headaches (severe pain around one eye). Common causes include stress, dehydration, lack of sleep, eye strain, and certain foods. Try rest, hydration, over-the-counter pain relievers, and stress management. See a doctor for severe, sudden, or recurring headaches.",
+        "Headaches have various causes including tension, migraines, sinus problems, dehydration, eye strain, or medication overuse. For relief, try resting in a dark quiet room, staying hydrated, using cold/hot compresses, and over-the-counter pain relievers. If headaches are severe, sudden, accompanied by fever/stiff neck, or interfere with daily activities, consult a healthcare provider.",
+        "For headache relief, identify the type - tension headaches respond to OTC pain relievers, rest, and stress reduction; migraines may need darkness, quiet, and sometimes prescription medication; sinus headaches improve with decongestants. Prevention includes regular sleep, hydration, stress management, and avoiding triggers. Seek medical attention for unusually severe headaches or those with concerning additional symptoms."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "fever",
+      "patterns": [
+        "Fever", "High temperature", "Fever in adults", "Fever in children",
+        "When to worry about fever", "Reduce fever", "Fever treatment",
+        "Fever and chills", "Fever causes", "How to take temperature"
+      ],
+      "responses": [
+        "A fever (temperature above 100.4°F/38°C) is often a sign your body is fighting an infection. For adults, manage with rest, fluids, and fever reducers like acetaminophen if uncomfortable. Seek immediate medical attention if a fever is above 103°F/39.4°C or accompanied by severe headache, rash, stiff neck, persistent vomiting, difficulty breathing, or confusion.",
+        "For fever management: stay hydrated, rest, dress lightly, use room temperature or slightly cool compresses, and take fever reducers like acetaminophen or ibuprofen as directed. In children under 3 months, any fever requires immediate medical attention. In older children and adults, seek care for very high fevers (above 103°F/39.4°C) or those with concerning symptoms.",
+        "Fever is a temperature above 100.4°F/38°C and often indicates illness or infection. While uncomfortable, fever actually helps your body fight infection. Rest, drink fluids, and use fever reducers for comfort if needed. Contact a healthcare provider for fevers lasting more than three days, fevers above 103°F/39.4°C, or when accompanied by severe symptoms like stiff neck, rash, or difficulty breathing."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "allergies",
+      "patterns": [
+        "Allergies", "Allergy symptoms", "Seasonal allergies", "Food allergies",
+        "Allergy treatment", "Allergic reaction", "Allergy testing", "Antihistamines",
+        "Allergy prevention", "Manage allergies", "Hay fever"
+      ],
+      "responses": [
+        "Allergy symptoms vary from sneezing, runny nose, and watery eyes (with environmental allergies) to rash, hives, swelling, or digestive issues (with food allergies). Management includes avoiding triggers, over-the-counter antihistamines, nasal sprays, and sometimes prescription medications. For severe allergies, consider testing to identify specific triggers and talk to your doctor about immunotherapy options.",
+        "For allergy relief, identify and avoid triggers when possible. For environmental allergies, try over-the-counter antihistamines, nasal corticosteroids, or decongestants. Keep windows closed during high pollen counts, shower after being outdoors, and use air purifiers. Food allergies require strict avoidance of trigger foods. Seek immediate medical attention for signs of severe allergic reaction like trouble breathing or swelling.",
+        "Allergies occur when your immune system reacts to a foreign substance. Management includes avoidance (for food/specific triggers), medications (antihistamines, decongestants, nasal sprays), and in some cases immunotherapy. Track your symptoms to identify patterns and triggers. If allergies significantly impact your quality of life despite over-the-counter treatments, consult an allergist for more specialized approaches."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "back_pain",
+      "patterns": [
+        "Back pain", "Lower back pain", "Upper back pain", "Back injury",
+        "Back pain treatment", "Back pain causes", "Chronic back pain",
+        "Back pain exercises", "Back pain relief", "Sciatica"
+      ],
+      "responses": [
+        "Back pain can result from muscle/ligament strain, bulging discs, arthritis, skeletal irregularities, or osteoporosis. For relief, try over-the-counter pain relievers, hot/cold therapy, gentle activity, proper posture, and strengthening exercises. Seek medical attention if pain follows an injury, is severe, spreads down legs, causes weakness/numbness, or is accompanied by unexplained weight loss.",
+        "For back pain relief: stay active with gentle movement, apply hot/cold packs, maintain good posture, strengthen core muscles, and use over-the-counter pain relievers if needed. Prevention includes proper lifting technique, maintaining healthy weight, regular exercise, and ergonomic workspace setup. See a doctor if pain is severe, persistent (>2 weeks), radiates down the leg, or includes numbness/tingling.",
+        "Most back pain improves with self-care within a few weeks. Rest briefly if needed, then maintain gentle activity. Pain relievers, ice/heat, and gentle stretching can help. Long-term management includes core-strengthening exercises, maintaining healthy weight, and proper body mechanics. Red flags requiring prompt medical attention include pain after an injury, numbness/tingling, bowel/bladder problems, fever, or pain that worsens when lying down."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "sleep",
+      "patterns": [
+        "Sleep problems", "Insomnia", "Can't sleep", "Sleep better", "Sleep hygiene",
+        "Sleep tips", "Sleep disorders", "Sleep apnea", "How much sleep", 
+        "Trouble falling asleep", "Always tired"
+      ],
+      "responses": [
+        "Good sleep hygiene includes: consistent sleep schedule (even weekends), relaxing bedtime routine, comfortable sleep environment (dark, quiet, cool), limiting screen time before bed, avoiding large meals/caffeine/alcohol near bedtime, and regular exercise (not too close to bedtime). Adults typically need 7-9 hours of sleep per night. If sleep problems persist despite these measures, consult a healthcare provider.",
+        "To improve sleep: establish regular sleep-wake times, create a restful environment, limit daytime naps, manage stress, increase physical activity, avoid caffeine/nicotine/alcohol before bed, and limit electronics before sleep. If you have persistent trouble sleeping, or symptoms like loud snoring, gasping during sleep, or excessive daytime sleepiness, consult a healthcare provider to rule out disorders like sleep apnea.",
+        "Insomnia can be caused by stress, anxiety, depression, changes in schedule or environment, poor sleep habits, certain medications, medical conditions, caffeine, or alcohol. To improve sleep, maintain sleep schedule, create a relaxing bedtime routine, limit bedroom activities to sleep and intimacy, consider relaxation techniques, and evaluate your sleep environment. See a doctor for persistent insomnia or symptoms of sleep disorders."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "nutrition",
+      "patterns": [
+        "Healthy diet", "Nutrition advice", "Balanced meal", "Healthy eating", "Diet tips",
+        "Nutrition guidelines", "Food pyramid", "What to eat", "Meal planning", 
+        "Nutritional needs", "Healthy food choices"
+      ],
+      "responses": [
+        "A balanced diet includes variety of fruits, vegetables, whole grains, lean proteins, and healthy fats. Fill half your plate with vegetables/fruits, quarter with whole grains, and quarter with protein. Limit processed foods, added sugars, sodium, and unhealthy fats. Stay hydrated with water. Nutritional needs vary by age, sex, health status, and activity level. Consult a registered dietitian for personalized advice.",
+        "Healthy eating guidelines: emphasize fruits, vegetables, whole grains, lean proteins, and low-fat dairy; limit saturated/trans fats, added sugars, and sodium; watch portion sizes; and choose a variety of nutrient-dense foods. Meal planning helps maintain balanced nutrition. Remember, occasional treats are part of a sustainable approach. For specific health conditions or weight goals, consider consulting a registered dietitian.",
+        "Nutrition basics include: eating a variety of foods from all food groups (fruits, vegetables, grains, protein, dairy); choosing nutrient-dense options over processed foods; controlling portion sizes; drinking plenty of water; and adjusting intake based on activity level. Pay attention to how food makes you feel. Consider keeping a food journal to identify patterns. Small, sustainable changes tend to be more effective than drastic diets."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "exercise",
+      "patterns": [
+        "Exercise recommendations", "How much exercise", "Exercise benefits", "Workout tips",
+        "Physical activity", "Exercise routine", "Fitness advice", "Starting exercise",
+        "Best exercises", "Cardio vs strength", "Exercise for health"
+      ],
+      "responses": [
+        "Adults should aim for at least 150 minutes of moderate-intensity aerobic activity or 75 minutes of vigorous activity weekly, plus muscle-strengthening activities at least twice weekly. Start slowly and gradually increase intensity/duration if you're new to exercise. Include a mix of cardio, strength training, and flexibility exercises. Always warm up, cool down, and listen to your body to prevent injury.",
+        "For general fitness: combine cardio (walking, swimming, cycling) for heart health; strength training (weights, resistance bands, bodyweight exercises) for muscles and metabolism; and flexibility exercises (stretching, yoga) for mobility. The best exercise is one you enjoy and will stick with consistently. If you have health conditions or have been inactive, consult your healthcare provider before starting a new program.",
+        "Exercise benefits include improved cardiovascular health, stronger muscles/bones, better weight management, enhanced mood, reduced disease risk, increased energy, better sleep, and improved cognitive function. If you're just starting, begin with 10-15 minutes of activity a few times a week and gradually increase. Incorporate movement throughout your day (take stairs, walk during calls, stretch during TV). Find activities you enjoy to help maintain consistency."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "stress",
+      "patterns": [
+        "Stress management", "Dealing with stress", "Stress reduction", "Anxiety help",
+        "Relaxation techniques", "Stress symptoms", "Calm anxiety", "Mental health",
+        "Stress relief", "Meditation", "Mindfulness"
+      ],
+      "responses": [
+        "Effective stress management techniques include: regular physical activity, relaxation practices (deep breathing, meditation, yoga), adequate sleep, healthy eating, connecting with others, limiting news consumption, time management, setting boundaries, and enjoying hobbies. If stress interferes with daily activities or causes physical symptoms, consider speaking with a mental health professional for additional strategies.",
+        "To manage stress: identify your triggers; practice relaxation techniques like deep breathing, progressive muscle relaxation, or mindfulness meditation; maintain physical activity; get adequate sleep; eat well; limit caffeine/alcohol; connect socially; manage time effectively; and set realistic expectations. For persistent stress or anxiety that impacts your daily life, consider seeking help from a mental health professional.",
+        "Stress reduction starts with recognizing stress symptoms (tension, irritability, difficulty concentrating, sleep problems). Practical techniques include brief mindfulness breaks, scheduled worry time, physical activity, limiting screen time, spending time in nature, journaling, and social connection. Different techniques work for different people - experiment to find what helps you. Remember that some stress is normal, but chronic stress requires attention."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "covid",
+      "patterns": [
+        "COVID symptoms", "Coronavirus", "COVID-19", "COVID test", "COVID vaccine",
+        "Long COVID", "COVID prevention", "COVID treatment", "COVID isolation",
+        "COVID exposure", "COVID guidelines"
+      ],
+      "responses": [
+        "Common COVID-19 symptoms include fever, cough, fatigue, muscle aches, headache, sore throat, congestion, shortness of breath, and loss of taste/smell. Symptoms can appear 2-14 days after exposure and range from mild to severe. If you have symptoms, get tested and follow current isolation guidelines. Seek emergency care for trouble breathing, persistent chest pain, confusion, inability to stay awake, or bluish lips/face.",
+        "To protect against COVID-19: stay up-to-date with recommended vaccines and boosters; improve ventilation indoors; follow local guidelines on masking; practice good hand hygiene; stay home when sick; and get tested if you have symptoms or known exposure. Prevention strategies may need adjustment based on local transmission levels, individual risk factors, and current variant characteristics.",
+        "If you test positive for COVID-19: follow current isolation guidelines; monitor your symptoms; stay hydrated; rest; take over-the-counter medications for symptom relief as needed; and inform close contacts. Seek medical attention for warning signs like difficulty breathing, persistent chest pain, confusion, or bluish lips/face. Some people may be eligible for treatments like antivirals - consult your healthcare provider, especially if you're at higher risk."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "high_blood_pressure",
+      "patterns": [
+        "High blood pressure", "Hypertension", "Blood pressure management", 
+        "Lower blood pressure", "Blood pressure medication", "Hypertension causes",
+        "Hypertension treatment", "Blood pressure readings", "Systolic pressure", 
+        "Diastolic pressure", "Blood pressure risks"
+      ],
+      "responses": [
+        "High blood pressure (hypertension) is when blood pressure consistently reads above 130/80 mmHg. It often has no symptoms but increases risk of heart disease and stroke. Management includes regular monitoring, medication (if prescribed), reducing sodium, regular exercise, maintaining healthy weight, limiting alcohol, managing stress, and not smoking. Regular check-ups are important as hypertension is often called the 'silent killer'.",
+        "To manage high blood pressure: follow medication regimen as prescribed; adopt the DASH diet (rich in fruits, vegetables, whole grains, lean protein); reduce sodium intake (aim for less than 1,500mg daily); exercise regularly (aim for 150 minutes/week); maintain healthy weight; limit alcohol; manage stress; and monitor your blood pressure at home. Work with your healthcare provider to determine your target blood pressure goal.",
+        "Lifestyle changes for blood pressure management include: regular physical activity (30+ minutes most days); heart-healthy eating (fruits, vegetables, whole grains, lean proteins, low-fat dairy); reducing sodium (processed foods contain the most); limiting alcohol; maintaining healthy weight; not smoking; managing stress; and getting adequate sleep. These approaches work best when combined and can sometimes reduce or eliminate the need for medication."
+      ],
+      "context": ["blood_pressure_prediction"]
+    },
+    {
+      "tag": "diabetes_management",
+      "patterns": [
+        "Manage diabetes", "Diabetes care", "Blood sugar control", "Diabetes diet",
+        "Diabetes medication", "Diabetes complications", "A1C levels", "Insulin",
+        "Type 2 diabetes management", "Diabetes monitoring", "Diabetes and exercise"
+      ],
+      "responses": [
+        "Diabetes management includes: regular blood glucose monitoring; medication/insulin as prescribed; balanced meals with consistent carbohydrate timing/amounts; regular physical activity; stress management; adequate sleep; and regular medical check-ups (including eye, foot, and dental exams). Work with your healthcare team to develop a personalized plan and learn how different factors affect your blood sugar levels.",
+        "For diabetes diet management: focus on consistent carbohydrate intake distributed throughout the day; emphasize fiber-rich foods (vegetables, fruits, whole grains, legumes); choose lean proteins; limit saturated/trans fats; minimize added sugars and refined grains; and practice portion control. Consider working with a registered dietitian to develop a meal plan tailored to your preferences, goals, and lifestyle.",
+        "Successful diabetes management requires a comprehensive approach: follow your medication regimen; monitor blood glucose as recommended; understand how food, activity, stress, and illness affect your levels; attend regular check-ups; get recommended screenings for complications; wear medical ID; and learn to recognize/treat high and low blood sugar. Stay informed about advances in diabetes care, and connect with support resources to help maintain long-term success."
+      ],
+      "context": ["diabetes_prediction"]
+    },
+    {
+      "tag": "healthy_lifestyle",
+      "patterns": [
+        "Healthy lifestyle", "Wellness tips", "Preventive health", "Healthy habits",
+        "Lifestyle changes", "Health improvement", "Wellness routine", "Best health practices",
+        "Daily health habits", "Longevity tips", "Overall wellness"
+      ],
+      "responses": [
+        "Key components of a healthy lifestyle include: balanced nutrition; regular physical activity; adequate sleep (7-9 hours for adults); stress management; not smoking; limiting alcohol; maintaining social connections; engaging in meaningful activities; preventive healthcare (regular check-ups, screenings, vaccinations); and practicing safe behaviors (seatbelts, sun protection). Small, consistent changes are more sustainable than major overhauls.",
+        "For overall wellness: focus on nutrient-dense foods; stay physically active; prioritize sleep hygiene; manage stress through techniques like mindfulness; stay hydrated; limit processed foods, added sugars, and excessive alcohol; maintain social connections; engage in activities you enjoy; get regular health check-ups; and be kind to yourself - wellness is a journey, not a destination.",
+        "Healthy habits with the biggest impact include: not smoking; maintaining healthy weight; being physically active; eating a diet rich in fruits, vegetables, whole grains, and lean proteins; limiting ultra-processed foods; managing stress; getting adequate sleep; staying socially connected; limiting alcohol; and keeping up with preventive healthcare. Start with 1-2 changes rather than trying to transform everything at once."
+      ],
+      "context": ["lifestyle_recommendation"]
+    },
+    {
+      "tag": "emergency",
+      "patterns": [
+        "Medical emergency", "Emergency symptoms", "When to call 911", "Urgent medical care",
+        "Emergency room", "Severe symptoms", "Life-threatening", "Immediate medical attention",
+        "Emergency situation", "Critical symptoms", "Emergency signs"
+      ],
+      "responses": [
+        "Seek emergency medical care (call emergency services) for: difficulty breathing; chest pain/pressure; severe bleeding; serious burns; major trauma; suspected stroke (face drooping, arm weakness, speech difficulty); severe allergic reaction; seizures; severe abdominal pain; loss of consciousness; or suicidal thoughts. Don't drive yourself if experiencing these symptoms - emergency medical personnel can begin treatment immediately upon arrival.",
+        "Medical emergencies requiring immediate attention include: difficulty breathing; chest pain; sudden severe pain; head injury with confusion/unconsciousness; severe or uncontrollable bleeding; coughing/vomiting blood; suicidal thoughts; severe burns; poisoning; choking; severe allergic reaction with swelling/breathing problems; sudden vision loss; or signs of stroke (FAST: Face drooping, Arm weakness, Speech difficulty, Time to call emergency services).",
+        "Call emergency services immediately for: chest pain lasting more than a few minutes; severe shortness of breath; signs of stroke (sudden numbness/weakness on one side, confusion, vision problems, trouble walking, severe headache); head injury with loss of consciousness; seizures; severe burns; major trauma; poisoning; severe allergic reaction; or uncontrolled bleeding. Don't delay seeking help for these potentially life-threatening situations."
+      ],
+      "context": ["emergency"]
+    },
+    {
+      "tag": "followup",
+      "patterns": [
+        "What else", "Tell me more", "More information", "Additional details",
+        "Can you elaborate", "I want to know more", "Further explanation",
+        "Go on", "Continue", "What else should I know"
+      ],
+      "responses": [
+        "What specific aspect would you like me to elaborate on? I can provide more information about symptoms, treatments, prevention strategies, or when to seek medical attention for various health conditions.",
+        "I'd be happy to provide more details. Which part are you most interested in learning more about? I can expand on causes, risk factors, management strategies, or other aspects of this health topic.",
+        "Is there a particular area you'd like more information about? I can provide additional details on prevention, symptoms, treatment options, or general health recommendations related to this topic."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "disclaimer",
+      "patterns": [
+        "Are you a doctor", "Medical advice", "Can I trust this", "Is this medical advice",
+        "Are you qualified", "Medical credentials", "Healthcare professional",
+        "Medical degree", "Licensed medical", "Medical license", "Replace doctor"
+      ],
+      "responses": [
+        "I'm an AI health assistant, not a licensed medical professional. The information I provide is educational and should not replace professional medical advice, diagnosis, or treatment. Always consult qualified healthcare providers for medical concerns, especially urgent or emergency situations. Never disregard professional medical advice because of something you've read here.",
+        "Important reminder: I'm an AI assistant, not a healthcare provider. The information I share is for general educational purposes only. I don't have access to your complete medical history or the ability to perform examinations. Always consult appropriate healthcare professionals for medical advice tailored to your specific situation, especially for new symptoms or health changes.",
+        "Please note: While I aim to provide helpful health information, I'm not a doctor or licensed healthcare provider. My responses should be considered as general information, not personalized medical advice. For diagnosis, treatment recommendations, or medical concerns, please consult with qualified healthcare professionals who can evaluate your specific situation in person."
+      ],
+      "context": [""]
+    }
+  ]
+}

@@ -1,0 +1,319 @@
+<div class="disease-prediction-container">
+    <form id="disease-prediction-form" class="mb-4">
+        <p class="mb-3">Select the symptoms you are experiencing:</p>
+        
+        <div class="mb-3">
+            <div class="form-floating">
+                <select id="symptom-search" class="form-select mb-2">
+                    <option value="" selected disabled>Search symptoms</option>
+                    <option value="itching">Itching</option>
+                    <option value="skin_rash">Skin Rash</option>
+                    <option value="nodal_skin_eruptions">Nodal Skin Eruptions</option>
+                    <option value="continuous_sneezing">Continuous Sneezing</option>
+                    <option value="shivering">Shivering</option>
+                    <option value="chills">Chills</option>
+                    <option value="joint_pain">Joint Pain</option>
+                    <option value="stomach_pain">Stomach Pain</option>
+                    <option value="acidity">Acidity</option>
+                    <option value="ulcers_on_tongue">Ulcers On Tongue</option>
+                    <option value="muscle_wasting">Muscle Wasting</option>
+                    <option value="vomiting">Vomiting</option>
+                    <option value="burning_micturition">Burning Micturition</option>
+                    <option value="fatigue">Fatigue</option>
+                    <option value="weight_gain">Weight Gain</option>
+                    <option value="anxiety">Anxiety</option>
+                    <option value="cold_hands_and_feets">Cold Hands And Feet</option>
+                    <option value="mood_swings">Mood Swings</option>
+                    <option value="weight_loss">Weight Loss</option>
+                    <option value="restlessness">Restlessness</option>
+                    <option value="lethargy">Lethargy</option>
+                    <option value="patches_in_throat">Patches In Throat</option>
+                    <option value="irregular_sugar_level">Irregular Sugar Level</option>
+                    <option value="cough">Cough</option>
+                    <option value="high_fever">High Fever</option>
+                    <option value="sunken_eyes">Sunken Eyes</option>
+                    <option value="breathlessness">Breathlessness</option>
+                    <option value="sweating">Sweating</option>
+                    <option value="dehydration">Dehydration</option>
+                    <option value="indigestion">Indigestion</option>
+                    <option value="headache">Headache</option>
+                    <option value="yellowish_skin">Yellowish Skin</option>
+                    <option value="dark_urine">Dark Urine</option>
+                    <option value="nausea">Nausea</option>
+                    <option value="loss_of_appetite">Loss Of Appetite</option>
+                    <option value="back_pain">Back Pain</option>
+                    <option value="constipation">Constipation</option>
+                    <option value="abdominal_pain">Abdominal Pain</option>
+                    <option value="diarrhoea">Diarrhoea</option>
+                    <option value="mild_fever">Mild Fever</option>
+                    <option value="chest_pain">Chest Pain</option>
+                    <option value="dizziness">Dizziness</option>
+                </select>
+                <label for="symptom-search">Search symptoms</label>
+            </div>
+            <button type="button" id="add-symptom" class="btn btn-outline-primary btn-sm">Add Symptom</button>
+        </div>
+        
+        <div class="mb-3">
+            <p class="fw-bold mb-2">Selected Symptoms:</p>
+            <div id="selected-symptoms" class="d-flex flex-wrap gap-2">
+                <span class="badge bg-light text-dark border">No symptoms selected</span>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary mt-3">
+            <i class="fas fa-stethoscope me-2"></i>Predict Disease
+        </button>
+    </form>
+    
+    <div id="disease-prediction-results" class="mt-4 d-none">
+        <div class="alert alert-info">
+            <div class="d-flex">
+                <div class="me-3">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                </div>
+                <div>
+                    <h5 class="alert-heading">Processing your symptoms...</h5>
+                    <p class="mb-0">Please wait while we analyze your symptoms.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="prediction-card d-none">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Diagnosis Results</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 id="predicted-disease" class="mb-3">Disease Name</h4>
+                            <div class="mb-3">
+                                <span class="badge bg-info me-2" id="confidence-badge">Confidence: 85%</span>
+                                <span class="badge bg-secondary" id="specialist-badge">Specialist: Cardiologist</span>
+                            </div>
+                            <p id="disease-description" class="mb-4">Disease description will appear here.</p>
+                            
+                            <h5 class="mb-3">Care Recommendations</h5>
+                            <ul id="care-recommendations" class="list-group mb-4">
+                                <!-- Recommendations will be added here -->
+                            </ul>
+                        </div>
+                        <div class="col-md-4 border-start">
+                            <div class="doctor-recommendation">
+                                <h5 class="mb-3">Recommended Specialist</h5>
+                                <div class="text-center mb-3">
+                                    <div class="icon-circle icon-circle-lg bg-primary-light mx-auto mb-3">
+                                        <i class="fas fa-user-md text-primary fa-2x"></i>
+                                    </div>
+                                    <h6 id="specialist-type">Cardiologist</h6>
+                                </div>
+                                <p class="small text-muted mb-3">Based on the predicted condition, we recommend consulting with a specialist in this field.</p>
+                                <a href="#appointments-section" class="btn btn-outline-primary btn-sm w-100" id="book-specialist">
+                                    <i class="fas fa-calendar-plus me-2"></i>Book Appointment
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-light">
+                    <p class="text-muted small mb-0">
+                        <i class="fas fa-exclamation-circle me-1"></i>
+                        This is an AI-assisted prediction and should not replace professional medical advice. Please consult with a healthcare provider.
+                    </p>
+                </div>
+            </div>
+            
+            <button type="button" class="btn btn-outline-secondary" id="reset-disease-prediction">
+                <i class="fas fa-redo me-2"></i>Start New Prediction
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setupDiseasePrediction();
+    });
+    
+    function setupDiseasePrediction() {
+        const form = document.getElementById('disease-prediction-form');
+        const resultsContainer = document.getElementById('disease-prediction-results');
+        const symptomSearch = document.getElementById('symptom-search');
+        const addSymptomBtn = document.getElementById('add-symptom');
+        const selectedSymptomsContainer = document.getElementById('selected-symptoms');
+        const resetBtn = document.getElementById('reset-disease-prediction');
+        const bookSpecialistBtn = document.getElementById('book-specialist');
+        
+        // Store selected symptoms
+        let selectedSymptoms = [];
+        
+        // Handle adding a symptom
+        addSymptomBtn.addEventListener('click', function() {
+            const symptomValue = symptomSearch.value;
+            const symptomText = symptomSearch.options[symptomSearch.selectedIndex].text;
+            
+            if (symptomValue && !selectedSymptoms.includes(symptomValue)) {
+                selectedSymptoms.push(symptomValue);
+                updateSelectedSymptoms();
+            }
+            
+            // Reset the select
+            symptomSearch.selectedIndex = 0;
+        });
+        
+        // Update the display of selected symptoms
+        function updateSelectedSymptoms() {
+            if (selectedSymptoms.length === 0) {
+                selectedSymptomsContainer.innerHTML = '<span class="badge bg-light text-dark border">No symptoms selected</span>';
+                return;
+            }
+            
+            selectedSymptomsContainer.innerHTML = '';
+            selectedSymptoms.forEach(symptom => {
+                const displayText = symptom.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                const badge = document.createElement('span');
+                badge.className = 'badge bg-primary text-white';
+                badge.innerHTML = `${displayText} <i class="fas fa-times-circle ms-1 cursor-pointer" data-symptom="${symptom}"></i>`;
+                selectedSymptomsContainer.appendChild(badge);
+                
+                // Add event listener to remove badge when clicked
+                badge.querySelector('i').addEventListener('click', function() {
+                    const symptomToRemove = this.dataset.symptom;
+                    selectedSymptoms = selectedSymptoms.filter(s => s !== symptomToRemove);
+                    updateSelectedSymptoms();
+                });
+            });
+        }
+        
+        // Handle form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (selectedSymptoms.length === 0) {
+                alert('Please select at least one symptom');
+                return;
+            }
+            
+            // Show loading state
+            resultsContainer.classList.remove('d-none');
+            resultsContainer.querySelector('.prediction-card').classList.add('d-none');
+            
+            // Make API request
+            fetch('/predict/disease', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    symptoms: selectedSymptoms
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    displayDiseaseResults(data.prediction);
+                } else {
+                    throw new Error(data.message || 'Error predicting disease');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultsContainer.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        ${error.message || 'An error occurred during prediction. Please try again.'}
+                    </div>
+                `;
+            });
+        });
+        
+        // Display prediction results
+        function displayDiseaseResults(prediction) {
+            // Hide loading, show results
+            resultsContainer.querySelector('.alert').classList.add('d-none');
+            const predictionCard = resultsContainer.querySelector('.prediction-card');
+            predictionCard.classList.remove('d-none');
+            
+            // Update UI with prediction data
+            document.getElementById('predicted-disease').textContent = prediction.disease;
+            document.getElementById('confidence-badge').textContent = `Confidence: ${prediction.confidence}%`;
+            document.getElementById('specialist-badge').textContent = `Specialist: ${prediction.specialist}`;
+            document.getElementById('disease-description').textContent = prediction.description;
+            document.getElementById('specialist-type').textContent = prediction.specialist;
+            
+            // Update care recommendations
+            const recommendationsList = document.getElementById('care-recommendations');
+            recommendationsList.innerHTML = '';
+            
+            prediction.care_recommendations.forEach(recommendation => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item d-flex align-items-start';
+                li.innerHTML = `
+                    <i class="fas fa-check-circle text-success me-2 mt-1"></i>
+                    <span>${recommendation}</span>
+                `;
+                recommendationsList.appendChild(li);
+            });
+            
+            // Set up the book appointment button to pre-fill the specialist
+            bookSpecialistBtn.addEventListener('click', function() {
+                // Show the appointments section
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.add('d-none');
+                });
+                document.getElementById('appointments-section').classList.remove('d-none');
+                
+                // Pre-select the specialist in the dropdown if possible
+                const specialistSelect = document.getElementById('specialist');
+                let specialistValue = '';
+                
+                switch(prediction.specialist.toLowerCase()) {
+                    case 'cardiologist':
+                        specialistValue = 'cardio';
+                        break;
+                    case 'dermatologist':
+                        specialistValue = 'derma';
+                        break;
+                    case 'neurologist':
+                        specialistValue = 'neuro';
+                        break;
+                    default:
+                        specialistValue = 'general';
+                }
+                
+                if (specialistSelect) {
+                    for (let i = 0; i < specialistSelect.options.length; i++) {
+                        if (specialistSelect.options[i].value === specialistValue) {
+                            specialistSelect.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+                
+                // Set the reason for visit if the textarea exists
+                const reasonTextarea = document.getElementById('reason');
+                if (reasonTextarea) {
+                    reasonTextarea.value = `Consultation regarding potential ${prediction.disease} diagnosis`;
+                }
+                
+                // Update sidebar to show appointments tab as active
+                const sidebarLinks = document.querySelectorAll('.sidebar-link');
+                sidebarLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#appointments-section') {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        }
+        
+        // Reset the form
+        resetBtn.addEventListener('click', function() {
+            form.reset();
+            selectedSymptoms = [];
+            updateSelectedSymptoms();
+            resultsContainer.classList.add('d-none');
+        });
+    }
+</script>
