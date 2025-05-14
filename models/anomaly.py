@@ -10,10 +10,17 @@ MODEL_SEQUENCE_LENGTH = 19  # What the model expects
 anomaly_model = None
 skip_tf = False
 
+# Try to import TensorFlow but don't crash if it fails
 try:
     import tensorflow as tf
-    from models.custom_tf_loader import load_tf_model_safely
+    tensorflow_available = True
     logger.info("TensorFlow imported successfully for anomaly detection")
+except Exception as e:
+    logger.error(f"Could not import TensorFlow: {str(e)}")
+    tensorflow_available = False
+
+try:
+    from models.custom_tf_loader import load_tf_model_safely
 
     try:
         anomaly_model = load_tf_model_safely(MODEL_PATH)
