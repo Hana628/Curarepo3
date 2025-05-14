@@ -8,7 +8,15 @@ MODEL_PATH = "attached_assets/trained_model.h5"  # Correct the path to .h5 model
 diabetes_model = None
 
 try:
+    # Try to import TensorFlow but don't crash if it fails
+try:
     import tensorflow as tf
+    tensorflow_available = True
+except Exception as e:
+    import logging
+    logger = logging.getLogger(__name__)
+    logger.error(f"Could not import TensorFlow: {str(e)}")
+    tensorflow_available = False
     from models.custom_tf_loader import load_tf_model_safely
     logger.info("TensorFlow imported successfully")
 

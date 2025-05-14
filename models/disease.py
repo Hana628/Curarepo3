@@ -230,15 +230,19 @@ def predict_disease(symptoms):
             disease = prediction[0]
             confidence = round(max(probabilities[0]) * 100, 2)
             
-            # If the model predicts a serious condition with only mild symptoms, use fallback
+            # Ensure we don't make overly serious predictions with just mild symptoms
             serious_conditions = [
                 "Paralysis (brain hemorrhage)", "Heart attack", "Tuberculosis", "AIDS"
             ]
             mild_symptoms = ['headache', 'fatigue', 'cough', 'nausea', 'fever']
             
+            # Instead of using fallback, adjust confidence if needed
             if disease in serious_conditions and all(s in mild_symptoms for s in symptoms):
-                logger.warning(f"Detected unreliable prediction ({disease}) for mild symptoms, using fallback")
-                return fallback_disease_prediction(symptoms)
+                logger.warning(f"Detected potentially unreliable prediction ({disease}) for mild symptoms")
+                # Instead of using a fallback, we'll add an alert to the response
+                disease_alert = "Note: Your symptoms may indicate multiple conditions. Please consult a healthcare professional for a proper diagnosis."
+            else:
+                disease_alert = None
             
             # Get specialist using the doctor-disease mapping if available
             if str(disease) in doctor_disease_mapping:
@@ -266,6 +270,10 @@ def predict_disease(symptoms):
                 "description": description,
                 "care_recommendations": care_recommendations
             }
+            
+            # Add alert if necessary
+            if disease_alert:
+                result["alert"] = disease_alert
             
             return result
         except Exception as model_error:
