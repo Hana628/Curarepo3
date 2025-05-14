@@ -262,22 +262,21 @@ def predict_disease(symptoms):
                 disease_alert = None
             
             # Get specialist using the doctor-disease mapping if available
-            specialist_info = {}
-            
-            # First try to get the specialty from the mapping
             if str(disease) in doctor_disease_mapping:
-                specialist_type = doctor_disease_mapping[str(disease)]
-                logger.info(f"Found specialist type '{specialist_type}' for disease '{disease}' from Doctor_Versus_Disease.csv")
-                specialist_info['type'] = specialist_type
+                specialist = doctor_disease_mapping[str(disease)]
+                logger.info(f"Found specialist '{specialist}' for disease '{disease}' from Doctor_Versus_Disease.csv")
             else:
-                specialist_type = SPECIALIST_MAPPING.get(str(disease), "general physician")
+                specialist = SPECIALIST_MAPPING.get(str(disease), "general physician")
                 logger.info(f"Using fallback specialist mapping for disease '{disease}'")
-                specialist_info['type'] = specialist_type
-            
+                
             # Try to find doctors from Pakistan specialist database
             try:
-                if 'pakistan_specialist_df' in locals():
-                    # Filter by specialist type if it exists in the dataframe
+                pakistan_doctors = []
+                pakistan_specialist_path = os.path.join("attached_assets", "PakistanSurgerySpecialist.csv")
+                if os.path.exists(pakistan_specialist_path):
+                    pakistan_specialist_df = pd.read_csv(pakistan_specialist_path)
+                    
+                    # Find specialty column (it might be named differently)
                     specialty_column = None
                     for col in pakistan_specialist_df.columns:
                         if 'special' in col.lower():
@@ -286,23 +285,30 @@ def predict_disease(symptoms):
                     
                     if specialty_column:
                         # Try exact match first
-                        matches = pakistan_specialist_df[pakistan_specialist_df[specialty_column].str.lower() == specialist_type.lower()]
+                        matches = pakistan_specialist_df[pakistan_specialist_df[specialty_column].str.lower() == specialist.lower()]
                         
                         # If no exact match, try partial match
                         if len(matches) == 0:
-                            matches = pakistan_specialist_df[pakistan_specialist_df[specialty_column].str.lower().str.contains(specialist_type.lower())]
+                            for keyword in specialist.lower().split():
+                                if len(keyword) > 3:  # Only use meaningful keywords
+                                    partial_matches = pakistan_specialist_df[pakistan_specialist_df[specialty_column].str.lower().str.contains(keyword)]
+                                    if len(partial_matches) > 0:
+                                        matches = partial_matches
+                                        break
                         
                         # If still no match, get any specialists
                         if len(matches) == 0:
                             matches = pakistan_specialist_df.sample(min(3, len(pakistan_specialist_df)))
                         
-                        # Get top 3 doctors
-                        top_doctors = matches.head(3)
-                        
-                        # Add the doctors to specialist info
-                        specialist_info['doctors'] = top_doctors.to_dict('records')
-                        
-                        logger.info(f"Found {len(top_doctors)} doctor(s) for specialty '{specialist_type}'")
+                        # Get doctor information
+                        if len(matches) > 0:
+                            for _, doctor in matches.head(3).iterrows():
+                                doctor_info = {}
+                                for col in doctor.index:
+                                    doctor_info[col] = doctor[col]
+                                pakistan_doctors.append(doctor_info)
+                            
+                        logger.info(f"Found {len(pakistan_doctors)} doctor(s) for specialty '{specialist}'")
             except Exception as e:
                 logger.warning(f"Error finding doctors from Pakistan specialist database: {str(e)}")
             
@@ -322,7 +328,8 @@ def predict_disease(symptoms):
                 "confidence": confidence,
                 "specialist": specialist,
                 "description": description,
-                "care_recommendations": care_recommendations
+                "care_recommendations": care_recommendations,
+                "pakistan_doctors": pakistan_doctors if 'pakistan_doctors' in locals() else []
             }
             
             # Add alert if necessary
@@ -545,5 +552,6 @@ def fallback_disease_prediction(symptoms):
         "specialist": specialist,
         "description": description,
         "care_recommendations": care_recommendations,
+        "pakistan_doctors": [],  # No specific doctors in fallback mode
         "note": "This is a preliminary assessment based on your symptoms."
     }
