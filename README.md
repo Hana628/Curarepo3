@@ -33,3 +33,4 @@ Enhanced symptom recognition capabilities
 Additional health assessment modules
 Improved medical knowledge base
 Support for actual wearable device integration
+# Curarepo3
