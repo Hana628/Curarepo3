@@ -4,7 +4,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-MODEL_PATH = "attached_assets/ecg_lstm_model.h5"
+MODEL_PATH = os.environ.get("ANOMALY_MODEL_PATH", "attached_assets/ecg_lstm_model.h5")
 SEQUENCE_LENGTH = 7  # Original sequence length for sliding window
 MODEL_SEQUENCE_LENGTH = 19  # What the model expects
 anomaly_model = None

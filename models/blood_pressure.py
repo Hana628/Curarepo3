@@ -5,8 +5,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# Path to the saved model
-MODEL_PATH = "attached_assets/bp_xgb.pkl"
+# Path to the saved model (can be overridden via environment variable)
+MODEL_PATH = os.environ.get("BP_MODEL_PATH", "attached_assets/bp_xgb.pkl")
 
 # Try to load the model
 try:

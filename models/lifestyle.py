@@ -6,8 +6,8 @@ import types
 
 logger = logging.getLogger(__name__)
 
-# Path to the saved model
-MODEL_PATH = "attached_assets/lifestyle_model_new.pkl"
+# Path to the saved model (can be overridden via environment variable)
+MODEL_PATH = os.environ.get("LIFESTYLE_MODEL_PATH", "attached_assets/lifestyle_model_new.pkl")
 
 # Initialize lifestyle_model as None
 lifestyle_model = None

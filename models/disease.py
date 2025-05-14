@@ -15,8 +15,8 @@ from sklearn.ensemble import RandomForestClassifier
 # Setup logging
 logger = logging.getLogger(__name__)
 
-# Path to the model file
-MODEL_PATH = os.path.join("attached_assets", "disease_prediction_model.pkl")
+# Path to the model file (can be overridden via environment variable)
+MODEL_PATH = os.environ.get("DISEASE_MODEL_PATH", os.path.join("attached_assets", "disease_prediction_model.pkl"))
 # Make sure we are using fallback since model file is missing
 model_file_exists = os.path.exists(MODEL_PATH)
 logger.warning(f"Disease prediction model file exists: {model_file_exists}")
