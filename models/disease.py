@@ -140,12 +140,29 @@ def predict_disease(symptoms):
         
         # Load the doctor-disease recommendations for accurate specialist recommendations
         try:
+            # First try the Doctor_Versus_Disease.csv file
             doctor_disease_path = os.path.join("attached_assets", "Doctor_Versus_Disease.csv")
-            doctor_disease_df = pd.read_csv(doctor_disease_path, header=None, names=['disease', 'specialist'])
-            # Create a mapping from disease to specialist
-            doctor_disease_mapping = dict(zip(doctor_disease_df['disease'].str.strip(), 
-                                             doctor_disease_df['specialist'].str.strip()))
-            logger.info(f"Loaded doctor-disease mapping with {len(doctor_disease_mapping)} entries")
+            if os.path.exists(doctor_disease_path):
+                doctor_disease_df = pd.read_csv(doctor_disease_path, header=None, names=['disease', 'specialist'])
+                # Create a mapping from disease to specialist
+                doctor_disease_mapping = dict(zip(doctor_disease_df['disease'].str.strip(), 
+                                                 doctor_disease_df['specialist'].str.strip()))
+                logger.info(f"Loaded doctor-disease mapping with {len(doctor_disease_mapping)} entries")
+            else:
+                logger.warning(f"Doctor_Versus_Disease.csv not found at {doctor_disease_path}")
+                doctor_disease_mapping = {}
+                
+            # Also try to load the Pakistan specialist data for more options
+            pakistan_specialist_path = os.path.join("attached_assets", "PakistanSurgerySpecialist.csv")
+            if os.path.exists(pakistan_specialist_path):
+                try:
+                    pakistan_specialist_df = pd.read_csv(pakistan_specialist_path)
+                    logger.info(f"Loaded Pakistan specialist data with {len(pakistan_specialist_df)} entries")
+                    # We'll use this later when recommending doctors
+                except Exception as e:
+                    logger.warning(f"Could not parse PakistanSurgerySpecialist.csv: {str(e)}")
+            else:
+                logger.warning(f"PakistanSurgerySpecialist.csv not found at {pakistan_specialist_path}")
         except Exception as e:
             logger.warning(f"Could not load doctor-disease mapping: {str(e)}")
             doctor_disease_mapping = {}
@@ -245,12 +262,49 @@ def predict_disease(symptoms):
                 disease_alert = None
             
             # Get specialist using the doctor-disease mapping if available
+            specialist_info = {}
+            
+            # First try to get the specialty from the mapping
             if str(disease) in doctor_disease_mapping:
-                specialist = doctor_disease_mapping[str(disease)]
-                logger.info(f"Found specialist '{specialist}' for disease '{disease}' from Doctor_Versus_Disease.csv")
+                specialist_type = doctor_disease_mapping[str(disease)]
+                logger.info(f"Found specialist type '{specialist_type}' for disease '{disease}' from Doctor_Versus_Disease.csv")
+                specialist_info['type'] = specialist_type
             else:
-                specialist = SPECIALIST_MAPPING.get(str(disease), "general physician")
+                specialist_type = SPECIALIST_MAPPING.get(str(disease), "general physician")
                 logger.info(f"Using fallback specialist mapping for disease '{disease}'")
+                specialist_info['type'] = specialist_type
+            
+            # Try to find doctors from Pakistan specialist database
+            try:
+                if 'pakistan_specialist_df' in locals():
+                    # Filter by specialist type if it exists in the dataframe
+                    specialty_column = None
+                    for col in pakistan_specialist_df.columns:
+                        if 'special' in col.lower():
+                            specialty_column = col
+                            break
+                    
+                    if specialty_column:
+                        # Try exact match first
+                        matches = pakistan_specialist_df[pakistan_specialist_df[specialty_column].str.lower() == specialist_type.lower()]
+                        
+                        # If no exact match, try partial match
+                        if len(matches) == 0:
+                            matches = pakistan_specialist_df[pakistan_specialist_df[specialty_column].str.lower().str.contains(specialist_type.lower())]
+                        
+                        # If still no match, get any specialists
+                        if len(matches) == 0:
+                            matches = pakistan_specialist_df.sample(min(3, len(pakistan_specialist_df)))
+                        
+                        # Get top 3 doctors
+                        top_doctors = matches.head(3)
+                        
+                        # Add the doctors to specialist info
+                        specialist_info['doctors'] = top_doctors.to_dict('records')
+                        
+                        logger.info(f"Found {len(top_doctors)} doctor(s) for specialty '{specialist_type}'")
+            except Exception as e:
+                logger.warning(f"Error finding doctors from Pakistan specialist database: {str(e)}")
             
             # Get description from disease descriptions if available
             if str(disease) in disease_descriptions:

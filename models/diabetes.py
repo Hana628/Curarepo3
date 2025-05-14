@@ -4,7 +4,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-MODEL_PATH = "attached_assets/trained_model.h5"  # Correct the path to .h5 model
+MODEL_PATH = os.environ.get("DIABETES_MODEL_PATH", "attached_assets/trained_model.h5")
 diabetes_model = None
 
 # Try to import TensorFlow but don't crash if it fails

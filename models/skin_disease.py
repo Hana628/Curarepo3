@@ -15,8 +15,8 @@ from PIL import Image
 # Set up logging
 logger = logging.getLogger(__name__)
 
-# Path to the model file
-MODEL_PATH = os.path.join("attached_assets", "model (1).h5")
+# Path to the model file (can be overridden via environment variable)
+MODEL_PATH = os.environ.get("SKIN_MODEL_PATH", os.path.join("attached_assets", "model (1).h5"))
 # Check if model file exists and log result
 model_file_exists = os.path.exists(MODEL_PATH)
 logger.warning(f"Skin disease model file exists: {model_file_exists}")
