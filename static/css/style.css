@@ -1,0 +1,63 @@
+/* Additional custom styles */
+.symptom-selection {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.prediction-result {
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.uploaded-image {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.loading-spinner {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.precaution-list {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.symptom-count {
+    font-size: 0.85rem;
+    color: var(--bs-secondary);
+    margin-top: 5px;
+}
+
+.app-title {
+    margin-bottom: 30px;
+}
+
+.result-header {
+    border-bottom: 1px solid var(--bs-secondary);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.form-card {
+    height: 100%;
+}
+
+/* Emphasis for the predicted disease */
+.disease-name {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--bs-primary);
+}
+
+/* Emphasis for specialist */
+.specialist-name {
+    font-weight: bold;
+    color: var(--bs-info);
+}
