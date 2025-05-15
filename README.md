@@ -33,9 +33,13 @@ Enhanced symptom recognition capabilities
 Additional health assessment modules
 Improved medical knowledge base
 Support for actual wearable device integration
+<<<<<<< HEAD
 # Curarepo3
 # Curarepo3
 # Curarepo3
 # Curarepo3
 # CuraFinal_
 # CuraFinal_
+=======
+
+>>>>>>> 7424c9c0946f27e871507833ade38e1098bfb0ee
